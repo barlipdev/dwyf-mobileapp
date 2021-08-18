@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.barlipdev.dwyf.authentication.ui.register.RegisterViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -46,6 +52,7 @@
             android:inputType="textEmailAddress"
             android:padding="15dp"
             android:textSize="15sp"
+            android:afterTextChanged="@{viewModel::setUsername}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -63,6 +70,7 @@
             android:inputType="textEmailAddress"
             android:padding="15dp"
             android:textSize="15sp"
+            android:afterTextChanged="@{viewModel::setEmail}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +89,7 @@
             android:textSize="15sp"
             android:drawableStart="@drawable/ic_baseline_lock_24"
             android:drawablePadding="8dp"
+            android:afterTextChanged="@{viewModel::setPassword}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_email" />
@@ -91,6 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Utwórz konto"
+            android:onClick="@{() -> viewModel.register(viewModel.username,viewModel.email,viewModel.password)}"
             app:cornerRadius="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

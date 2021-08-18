@@ -4,16 +4,25 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.225" />
+        <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/drawable/cardview.xml" value="0.225" />
+        <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.190625" />
+        <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.190625" />
+        <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/drawable/ic_baseline_person_24_login.xml" value="0.190625" />
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/drawable/ic_launcher_background.xml" value="0.225" />
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/drawable/input_style.xml" value="0.225" />
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/activity_auth.xml" value="0.358695652173913" />
+        <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/activity_home.xml" value="0.34148550724637683" />
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/authentication_activity.xml" value="0.20885416666666667" />
+        <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/bottom_adding_fragment.xml" value="0.25" />
+        <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/home_fragment.xml" value="0.33" />
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/login_fragment.xml" value="0.33" />
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/main_auth_fragment.xml" value="0.20885416666666667" />
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/register_fragment.xml" value="0.20885416666666667" />
+        <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/scan_fragment.xml" value="0.20989583333333334" />
         <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/layout/welcome_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/PracaInzynierska/Aplikacja/app/src/main/res/menu/bottom_nav.xml" value="0.371875" />
       </map>
     </option>
   </component>
