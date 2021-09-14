@@ -11,6 +11,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val navigateToScan: LiveData<Boolean>
         get() = _navigateToScan
 
+    private val _navigateToProducts = MutableLiveData<Boolean>()
+    val navigateToProducts: LiveData<Boolean>
+        get() = _navigateToProducts
+
     private val _user = MutableLiveData<User>()
     val user: LiveData<User>
         get() = _user
@@ -25,6 +29,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun navigateToScanFinished(){
         _navigateToScan.value = false
+    }
+
+    fun navigtateToProducts(){
+        _navigateToProducts.value = true
+    }
+
+    fun navigtateToProductsFinished(){
+        _navigateToProducts.value = false
     }
 
 

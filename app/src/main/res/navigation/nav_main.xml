@@ -11,9 +11,16 @@
         <action
             android:id="@+id/action_homeFragment2_to_scanFragment"
             app:destination="@id/scanFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_productsFragment"
+            app:destination="@id/productsFragment" />
     </fragment>
     <fragment
         android:id="@+id/scanFragment"
         android:name="com.barlipdev.dwyf.app.product.scanning.ScanFragment"
         android:label="ScanFragment" />
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.barlipdev.dwyf.app.product.productlist.ProductsFragment"
+        android:label="ProductsFragment" />
 </navigation>

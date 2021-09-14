@@ -20,4 +20,10 @@ class UserRepository(private val api: UserApi) :BaseRepository(){
         api.addProduct(userId,product)
     }
 
+    suspend fun getProductList(
+        userId: String
+    ) = safeApiCall {
+        api.getProductList(userId)
+    }
+
 }

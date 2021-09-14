@@ -63,6 +63,7 @@ class ScanFragment : Fragment() {
         val scannerView = binding.scannerView
         val activity = requireActivity()
         var userId = arguments?.getString("userId").toString()
+        val dialog = BottomSheetDialog(requireContext())
         codeScanner = CodeScanner(activity, scannerView)
 
         codeScanner.apply {
@@ -103,7 +104,7 @@ class ScanFragment : Fragment() {
                     Log.i("ProductInfo",it.toString())
                     var date: String
                     val product = it.value
-                    val dialog = BottomSheetDialog(requireContext())
+
 
                     val view = layoutInflater.inflate(R.layout.bottom_adding_fragment,null)
 
@@ -123,10 +124,8 @@ class ScanFragment : Fragment() {
                         activity.runOnUiThread {
                             viewModel.addProduct(userId,product)
                         }
-                        dialog.dismiss()
-                        codeScanner.startPreview()
-                    }
 
+                    }
                     dialog.setCancelable(false)
                     dialog.setContentView(sheetBinding.bottomSheetView)
                     dialog.show()
@@ -139,12 +138,16 @@ class ScanFragment : Fragment() {
 
         } })
 
-        viewModel.addedProduct.observe(viewLifecycleOwner, androidx.lifecycle.Observer { addedProduct -> addedProduct?.let {
+        viewModel.addedProduct.observe(viewLifecycleOwner, androidx.lifecycle.Observer { addedProduct -> addedProduct?.let {it ->
             when(it){
                 is Resource.Success ->{
-                    Toast.makeText(context,"Dodano produkt",Toast.LENGTH_SHORT)
+                    Toast.makeText(context,"Dodano "+it.value.name,Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                    codeScanner.startPreview()
                 }
-
+                is Resource.Failure ->{
+                    Toast.makeText(context,"Nie udało sie dodać produktu",Toast.LENGTH_SHORT).show()
+                }
             }
         } })
 

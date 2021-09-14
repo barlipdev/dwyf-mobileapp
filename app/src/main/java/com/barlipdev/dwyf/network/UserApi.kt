@@ -17,4 +17,9 @@ interface UserApi {
         @Query("userId") userId: String,
         @Body product: Product
     ) : Product
+
+    @GET("/users/product")
+    suspend fun getProductList(
+        @Query("userId") userId: String
+    ) : List<Product>
 }

@@ -55,6 +55,15 @@ class HomeFragment : Fragment() {
             }
         } })
 
+        viewModel.navigateToProducts.observe(viewLifecycleOwner, Observer { isNavigate -> isNavigate?.let {
+            if (this.findNavController().currentDestination?.id == R.id.homeFragment2){
+                if (isNavigate){
+                    val bundle = bundleOf("userId" to viewModel.user.value?.id)
+                    this.findNavController().navigate(R.id.action_homeFragment2_to_productsFragment, bundle)
+                    viewModel.navigateToScanFinished()
+                }
+            }
+        } })
 
 
         preferences.userJson.observe(viewLifecycleOwner, Observer {
