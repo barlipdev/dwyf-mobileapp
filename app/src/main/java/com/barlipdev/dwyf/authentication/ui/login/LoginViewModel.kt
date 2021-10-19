@@ -1,16 +1,13 @@
 package com.barlipdev.dwyf.authentication.ui.login
 
 import android.app.Application
-import android.content.Context
 import android.text.Editable
 import androidx.lifecycle.*
-import com.barlipdev.dwyf.datastore.DataStoreManager
 import com.barlipdev.dwyf.network.AuthApi
 import com.barlipdev.dwyf.network.RemoteDataSource
 import com.barlipdev.dwyf.network.Resource
 import com.barlipdev.dwyf.network.repository.AuthRepository
-import com.barlipdev.dwyf.network.responses.User
-import kotlinx.coroutines.GlobalScope
+import com.barlipdev.dwyf.network.responses.LoginResponse
 import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
@@ -27,9 +24,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val password: LiveData<String>
         get() = _password
 
-    private val _user = MutableLiveData<Resource<User>>()
-    val user: LiveData<Resource<User>>
-        get() = _user
+    private val _loginResponse = MutableLiveData<Resource<LoginResponse>>()
+    val loginResponse: LiveData<Resource<LoginResponse>>
+        get() = _loginResponse
 
     private val remoteDataSource = RemoteDataSource()
     private val repository = AuthRepository(remoteDataSource.buildApi(AuthApi::class.java))
@@ -40,7 +37,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     ){
         _navigateToHome.value = true
         viewModelScope.launch {
-            _user.value = repository.login(email,password)
+            _loginResponse.value = repository.login(email,password)
         }
     }
 

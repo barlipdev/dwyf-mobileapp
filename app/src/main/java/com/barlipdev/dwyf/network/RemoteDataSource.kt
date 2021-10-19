@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RemoteDataSource {
 
     companion object{
-        private const val  BASE_URL = "https://dwyf-api.herokuapp.com/"
+        private const val  BASE_URL = "http://51.68.139.166:8091/"
     }
 
     fun <Api> buildApi( api: Class<Api>, authToken: String? = null): Api {

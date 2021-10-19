@@ -2,11 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.DWYF" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#EEC84B</item>
-        <item name="colorPrimaryVariant">#EEC84B</item>
+        <item name="colorPrimary">#C6984F</item>
+        <item name="colorPrimaryVariant">#C6984F</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#EEC84B</item>
+        <item name="colorSecondary">#C6984F</item>
         <item name="colorSecondaryVariant">#A8FFB0</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->

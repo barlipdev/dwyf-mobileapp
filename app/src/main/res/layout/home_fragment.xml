@@ -12,20 +12,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg"
+        android:background="@drawable/bg2"
         tools:context=".app.home.HomeFragment">
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:text="Cześć, "
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/hebbo"
+            android:text="Witamy, "
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.071"
+            app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,14 +34,26 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/hebbo"
             android:text="@{viewModel.user.username}"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.383"
+            app:layout_constraintHorizontal_bias="0.068"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <ImageView
+            style="@style/Circural"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="28dp"
+            android:src="@{viewModel.user.avatarUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.861"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
@@ -48,10 +61,10 @@
             android:layout_width="150dp"
             android:layout_height="200dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:clickable="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
             android:focusable="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -76,8 +89,9 @@
                     android:layout_height="wrap_content"
                     android:text="Szukaj dania"
                     android:textAlignment="center"
-                    android:textColor="@color/person_icon_background"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
@@ -120,8 +134,9 @@
                     android:layout_height="wrap_content"
                     android:text="Dodaj produkt"
                     android:textSize="20sp"
-                    android:textColor="@color/person_icon_background"
+                    android:textColor="@color/black"
                     android:textAlignment="center"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView2" />
@@ -133,7 +148,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="200dp"
             android:layout_height="450dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="70dp"
             android:layout_marginEnd="16dp"
             android:clickable="true"
             android:focusable="true"
@@ -166,7 +181,8 @@
                     android:layout_height="wrap_content"
                     android:text="Spiżarnia"
                     android:textAlignment="center"
-                    android:textColor="@color/person_icon_background"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

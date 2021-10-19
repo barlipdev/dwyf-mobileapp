@@ -1,18 +1,16 @@
 package com.barlipdev.dwyf.network
 
+import com.barlipdev.dwyf.network.responses.LoginData
+import com.barlipdev.dwyf.network.responses.LoginResponse
 import com.barlipdev.dwyf.network.responses.User
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface AuthApi {
 
-    @FormUrlEncoded
-    @POST("login/v2")
+    @POST("login")
     suspend fun login(
-        @Field("email") email: String ,
-        @Field("password") password: String
-    ) : User
+        @Body loginData: LoginData
+    ) : LoginResponse
 
     @FormUrlEncoded
     @POST("register")
@@ -21,5 +19,4 @@ interface AuthApi {
         @Field("email") email: String,
         @Field("password") password: String
     ) : User
-
 }

@@ -1,6 +1,5 @@
 package com.barlipdev.dwyf.authentication.ui.login
 
-import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -11,16 +10,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.barlipdev.dwyf.MainActivity
-import com.barlipdev.dwyf.R
 import com.barlipdev.dwyf.app.home.HomeActivity
 import com.barlipdev.dwyf.databinding.LoginFragmentBinding
 import com.barlipdev.dwyf.datastore.DataStoreManager
 import com.barlipdev.dwyf.network.Resource
 import com.barlipdev.dwyf.utils.startNewActivity
 import com.barlipdev.dwyf.utils.visible
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
@@ -46,15 +41,15 @@ class LoginFragment : Fragment() {
 
         binding.progresBar.visible(false)
 
-        viewModel.user.observe(viewLifecycleOwner, Observer { user -> user?.let {
+        viewModel.loginResponse.observe(viewLifecycleOwner, Observer { user -> user?.let {
             when (it){
                 is Resource.Success -> {
                     binding.progresBar.visible(false)
                     Log.i("UserInfo",it.toString())
                     Toast.makeText(context,"Udało się zalogować!", Toast.LENGTH_SHORT).show()
                     lifecycleScope.launch {
-                        preferences.saveAuthToken(it.value.auth_token)
-                        preferences.saveUser(it.value)
+                        preferences.saveAuthToken(it.value.authToken)
+                        preferences.saveUser(it.value.user)
                         requireActivity().startNewActivity(HomeActivity::class.java)
                     }
                 }
