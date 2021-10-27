@@ -2,6 +2,8 @@ package com.barlipdev.dwyf.app.home
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.os.SystemClock
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +11,16 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.barlipdev.dwyf.R
 import com.barlipdev.dwyf.app.product.scanning.ScanViewModel
 import com.barlipdev.dwyf.authentication.AuthenticationActivity
 import com.barlipdev.dwyf.databinding.HomeFragmentBinding
 import com.barlipdev.dwyf.datastore.DataStoreManager
+import com.barlipdev.dwyf.network.Resource
 import com.barlipdev.dwyf.utils.startNewActivity
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -60,11 +65,34 @@ class HomeFragment : Fragment() {
                 if (isNavigate){
                     val bundle = bundleOf("userId" to viewModel.user.value?.id)
                     this.findNavController().navigate(R.id.action_homeFragment2_to_productsFragment, bundle)
-                    viewModel.navigateToScanFinished()
+                    viewModel.navigateToProductsFinished()
                 }
             }
         } })
 
+        viewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { isNavigate -> isNavigate?.let {
+            if (this.findNavController().currentDestination?.id == R.id.homeFragment2){
+                if (isNavigate){
+                    this.findNavController().navigate(R.id.action_homeFragment2_to_recipeFragment)
+                    viewModel.navigateToRecipeFinished()
+                }
+            }
+        } })
+
+        viewModel.matchedRecipe.observe(viewLifecycleOwner, Observer { matchedRecipe -> matchedRecipe?.let {
+            when(it){
+                is Resource.Success -> {
+                    lifecycleScope.launch {
+                        preferences.saveMatchedRecipe(it.value)
+                    }
+                    Log.i("RecipeInfo", it.value.recipe.name)
+                    viewModel.navigateToRecipe()
+                }
+                is Resource.Failure -> {
+                    Log.i("RecipeInfo",it.toString())
+                }
+            }
+        } })
 
         preferences.userJson.observe(viewLifecycleOwner, Observer {
             if (it != null){

@@ -5,10 +5,10 @@
     <item
         android:id="@+id/homeFragment2"
         android:title="Panel Główny"
-        android:icon="@drawable/ic_baseline_home_24"/>
+        android:icon="@drawable/ic_home"/>
     <item
         android:id="@+id/profileFragment"
         android:title="Profil"
-        android:icon="@drawable/ic_baseline_person_24"/>
+        android:icon="@drawable/ic_profile"/>
 
 </menu>

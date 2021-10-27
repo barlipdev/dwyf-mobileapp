@@ -50,14 +50,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         _password.value = s.toString()
     }
 
-    fun navigateToHome(){
-        _navigateToHome.value = true
-    }
-
-    fun navigateToHomeFinished(){
-        _navigateToHome.value = false
-    }
-
 
     class Factory(val app: Application) : ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

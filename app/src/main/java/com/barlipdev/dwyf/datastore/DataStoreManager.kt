@@ -10,6 +10,7 @@ import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
+import com.barlipdev.dwyf.network.responses.MatchedRecipe
 import com.barlipdev.dwyf.network.responses.User
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
@@ -39,12 +40,23 @@ class DataStoreManager(context: Context) {
         preferences[KEY_USER]
     }.asLiveData()
 
+    val matchedRecipeJson: LiveData<String?> = dataStore.data.map { preferences ->
+        preferences[KEY_MATCHED_RECIPE]
+    }.asLiveData()
+
 
     fun getUserFromJson(): LiveData<User?> {
         val gson: Gson = Gson()
         val _user = MutableLiveData<User>()
         _user.value = gson.fromJson(userJson.value, User::class.java)
         return _user
+    }
+
+    fun getMatchedRecipeFromJson(): LiveData<MatchedRecipe?> {
+        val gson: Gson = Gson()
+        val _matchedRecipe = MutableLiveData<MatchedRecipe>()
+        _matchedRecipe.value = gson.fromJson(matchedRecipeJson.value, MatchedRecipe::class.java)
+        return _matchedRecipe
     }
 
     suspend fun saveAuthToken(authToken: String){
@@ -63,9 +75,19 @@ class DataStoreManager(context: Context) {
         }
     }
 
+    suspend fun saveMatchedRecipe(matchedRecipe: MatchedRecipe){
+        dataStore.edit { preferences ->
+            val gson: Gson = Gson()
+            val json: String = gson.toJson(matchedRecipe)
+            preferences[KEY_MATCHED_RECIPE] = json
+        }
+        Log.i("RecipeInfo","Saved")
+    }
+
 
     companion object{
         private val KEY_AUTH = preferencesKey<String>("key_auth")
         private val KEY_USER = preferencesKey<String>("key_user")
+        private val KEY_MATCHED_RECIPE = preferencesKey<String>("key_matched_recipe")
     }
 }

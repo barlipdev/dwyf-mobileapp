@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/ic_bg"
         tools:context=".app.home.HomeFragment">
 
         <ImageView
@@ -33,6 +34,7 @@
             android:layout_marginTop="16dp"
             android:text="Twoja spiżarnia:"
             android:textColor="@color/black"
+            android:fontFamily="@font/hebbo"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,14 +45,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/productListRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="611dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/border"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
-            tools:layout_editor_absoluteX="0dp"
             tools:listitem="@layout/product_item" />
 
         <ProgressBar
