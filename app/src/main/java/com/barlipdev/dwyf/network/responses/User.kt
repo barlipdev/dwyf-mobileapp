@@ -6,5 +6,6 @@ data class User(
     val id: String,
     val password: String,
     val productList: List<Product>,
-    val username: String
+    val username: String,
+    val shoppingLists: List<ShoppingList>
 )

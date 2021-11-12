@@ -1,56 +1,39 @@
-package com.barlipdev.dwyf.app.product.productlist
+package com.barlipdev.dwyf.app.profile
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.barlipdev.dwyf.datastore.DataStoreManager
 import com.barlipdev.dwyf.network.RemoteDataSource
 import com.barlipdev.dwyf.network.Resource
 import com.barlipdev.dwyf.network.UserApi
 import com.barlipdev.dwyf.network.repository.UserRepository
-import com.barlipdev.dwyf.network.responses.Product
-import com.barlipdev.dwyf.network.responses.User
+import com.barlipdev.dwyf.network.responses.ShoppingList
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class ProductsViewModel(application: Application) : AndroidViewModel(application) {
+class ProfileViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _productsList = MutableLiveData<Resource<List<Product>>>()
-    val productsList: LiveData<Resource<List<Product>>>
-        get() = _productsList
-
-    private val _user = MutableLiveData<Resource<User>>()
-    val user: LiveData<Resource<User>>
-        get() = _user
+    private val _shoppingLists = MutableLiveData<Resource<List<ShoppingList>>>()
+    val shoppingLists: LiveData<Resource<List<ShoppingList>>>
+        get() = _shoppingLists
 
     private val remoteDataSource = RemoteDataSource()
     private var preferences: DataStoreManager = DataStoreManager(application.applicationContext)
     private val authToken = runBlocking { preferences.authToken.first() }
     private val repository = UserRepository(remoteDataSource.buildApi(UserApi::class.java,authToken))
 
-    fun getProductsList(
-        userId: String
-    ){
+    fun getShoppingLists(userId: String){
         viewModelScope.launch {
-            _productsList.value = repository.getProductList(userId)
+            _shoppingLists.value = repository.getShoppingLists(userId)
         }
     }
-
-    fun deleteExpiredProducts(
-        userId: String
-    ){
-        viewModelScope.launch {
-            _user.value = repository.deleteExpiredProducts(userId)
-        }
-    }
-
 
     class Factory(val app: Application): ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(ProductsViewModel::class.java)){
+            if (modelClass.isAssignableFrom(ProfileViewModel::class.java)){
                 @Suppress("UNCHECKED_CAST")
-                return ProductsViewModel(app) as T
+                return ProfileViewModel(app) as T
             }
             throw IllegalArgumentException("Unbale to construct viewmodel")
         }

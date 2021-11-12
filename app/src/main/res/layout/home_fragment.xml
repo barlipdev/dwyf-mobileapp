@@ -15,18 +15,28 @@
         android:background="@drawable/ic_bg"
         tools:context=".app.home.HomeFragment">
 
-        <ImageView
-            android:id="@+id/imageView3"
-            style="@style/Circural"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profileImg"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:src="@{viewModel.user.avatarUrl}"
+            android:elevation="12dp"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            app:cardCornerRadius="40dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"></ImageView>
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -37,7 +47,7 @@
             android:layout_marginTop="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{() -> viewModel.getPrefferedRecipe(viewModel.user.id)}"
+            android:onClick="@{() -> viewModel.navigateToFilterRecipe()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2">
@@ -199,7 +209,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ulubione dania"
+                    android:text="Historia dań oraz otwarte przepisy"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="15sp"

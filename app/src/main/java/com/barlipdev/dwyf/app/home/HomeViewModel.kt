@@ -16,11 +16,6 @@ import kotlinx.coroutines.runBlocking
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val remoteDataSource = RemoteDataSource()
-    private var preferences: DataStoreManager = DataStoreManager(application.applicationContext)
-    private val authToken = runBlocking { preferences.authToken.first() }
-    private val repository = RecipeRepository(remoteDataSource.buildApi(RecipeApi::class.java,authToken))
-
     private val _navigateToScan = MutableLiveData<Boolean>()
     val navigateToScan: LiveData<Boolean>
         get() = _navigateToScan
@@ -33,15 +28,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val navigateToProducts: LiveData<Boolean>
         get() = _navigateToProducts
 
-    private val _navigateToRecipe = MutableLiveData<Boolean>()
-    val navigateToRecipe: LiveData<Boolean>
-        get() = _navigateToRecipe
+    private val _navigateToFilterRecipe = MutableLiveData<Boolean>()
+    val navigateToFilterRecipe: LiveData<Boolean>
+        get() = _navigateToFilterRecipe
 
-    fun getPrefferedRecipe(userId: String){
-        viewModelScope.launch {
-            _matchedRecipe.value = repository.getPrefferedRecipe(userId)
-        }
-    }
 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User>
@@ -67,12 +57,12 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         _navigateToProducts.value = false
     }
 
-    fun navigateToRecipe(){
-        _navigateToRecipe.value = true
+    fun navigateToFilterRecipe(){
+        _navigateToFilterRecipe.value = true
     }
 
-    fun navigateToRecipeFinished(){
-        _navigateToRecipe.value = false
+    fun navigateToFilterRecipeFinished(){
+        _navigateToFilterRecipe.value = false
     }
 
 

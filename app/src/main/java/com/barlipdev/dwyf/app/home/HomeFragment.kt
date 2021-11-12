@@ -20,6 +20,7 @@ import com.barlipdev.dwyf.databinding.HomeFragmentBinding
 import com.barlipdev.dwyf.datastore.DataStoreManager
 import com.barlipdev.dwyf.network.Resource
 import com.barlipdev.dwyf.utils.startNewActivity
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -50,6 +51,7 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
         viewModel.navigateToScan.observe(viewLifecycleOwner, Observer { isNavigate -> isNavigate?.let {
             if (this.findNavController().currentDestination?.id == R.id.homeFragment2){
                 if (isNavigate){
@@ -70,26 +72,11 @@ class HomeFragment : Fragment() {
             }
         } })
 
-        viewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { isNavigate -> isNavigate?.let {
+        viewModel.navigateToFilterRecipe.observe(viewLifecycleOwner, Observer { isNavigate -> isNavigate?.let {
             if (this.findNavController().currentDestination?.id == R.id.homeFragment2){
                 if (isNavigate){
-                    this.findNavController().navigate(R.id.action_homeFragment2_to_recipeFragment)
-                    viewModel.navigateToRecipeFinished()
-                }
-            }
-        } })
-
-        viewModel.matchedRecipe.observe(viewLifecycleOwner, Observer { matchedRecipe -> matchedRecipe?.let {
-            when(it){
-                is Resource.Success -> {
-                    lifecycleScope.launch {
-                        preferences.saveMatchedRecipe(it.value)
-                    }
-                    Log.i("RecipeInfo", it.value.recipe.name)
-                    viewModel.navigateToRecipe()
-                }
-                is Resource.Failure -> {
-                    Log.i("RecipeInfo",it.toString())
+                    this.findNavController().navigate(R.id.action_homeFragment2_to_filterRecipeFragment)
+                    viewModel.navigateToFilterRecipeFinished()
                 }
             }
         } })
@@ -97,6 +84,10 @@ class HomeFragment : Fragment() {
         preferences.userJson.observe(viewLifecycleOwner, Observer {
             if (it != null){
                 viewModel.setUser(preferences.getUserFromJson().value)
+                Glide
+                    .with(this)
+                    .load(viewModel.user.value?.avatarUrl)
+                    .into(binding.imageView3);
             }
         })
 

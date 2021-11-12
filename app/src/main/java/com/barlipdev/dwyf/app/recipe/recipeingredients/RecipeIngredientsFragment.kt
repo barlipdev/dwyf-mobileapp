@@ -7,9 +7,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import com.barlipdev.dwyf.app.home.HomeActivity
 import com.barlipdev.dwyf.databinding.RecipeIngredientsFragmentBinding
 import com.barlipdev.dwyf.datastore.DataStoreManager
+import com.barlipdev.dwyf.network.Resource
+import com.barlipdev.dwyf.utils.startNewActivity
+import com.barlipdev.dwyf.utils.visible
+import kotlinx.coroutines.launch
 
 class RecipeIngredientsFragment : Fragment() {
 
@@ -38,14 +45,45 @@ class RecipeIngredientsFragment : Fragment() {
                 binding.recyclerViewProducts.adapter = RecipeProductsAdapter(preferences.getMatchedRecipeFromJson().value!!.recipe.productList)
                 binding.recyclerViewProductsAvail.adapter = RecipeProductsAdapter(preferences.getMatchedRecipeFromJson().value!!.availableProducts)
                 binding.recyclerViewProductsNotAvail.adapter = RecipeProductsAdapter(preferences.getMatchedRecipeFromJson().value!!.notAvailableProducts)
+                binding.matchedRecipe = preferences.getMatchedRecipeFromJson().value
+
+                if (preferences.getMatchedRecipeFromJson().value!!.notAvailableProducts.isNotEmpty()){
+                    viewModel.showButtonShoppingListOn()
+                }else{
+                    viewModel.showButtonShoppingListOff()
+                }
             }
         })
+
 
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        viewModel.userResponse.observe(viewLifecycleOwner, Observer { user -> user?.let {
+            when (it){
+                is Resource.Success -> {
+                    lifecycleScope.launch {
+                        preferences.saveUser(it.value)
+                        Toast.makeText(context,"Dodano nowa listę zakupów!",Toast.LENGTH_SHORT)
+                    }
+                }
+                is Resource.Failure -> {
+                    Toast.makeText(context,"Nie udało się dodać listy zakupów!",Toast.LENGTH_SHORT)
+                    Log.i("UserShoppingList",it.toString())
+                }
+            }
+
+        } })
+
+        preferences.userJson.observe(viewLifecycleOwner, Observer {
+            if (it != null){
+                binding.user = preferences.getUserFromJson().value
+            }
+        })
+
 
     }
 

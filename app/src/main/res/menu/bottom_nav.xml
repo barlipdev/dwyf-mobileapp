@@ -7,7 +7,7 @@
         android:title="Panel Główny"
         android:icon="@drawable/ic_home"/>
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/profileFragment2"
         android:title="Profil"
         android:icon="@drawable/ic_profile"/>
 

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.barlipdev.dwyf.app.recipe.filterrecipe.FilterRecipeViewModel" />
+        <variable
+            name="user"
+            type="com.barlipdev.dwyf.network.responses.User" />
+        <import type="com.barlipdev.dwyf.network.responses.FoodTypeFilter"/>
+        <import type="com.barlipdev.dwyf.network.responses.ProductFilter"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_bg">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="match_parent"
+            android:layout_height="201dp"
+            android:src="@drawable/ic_recipeimg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wybierz filtry: "
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11"
+            >
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Użyj produktów o najwyższej jakości"
+                android:checked="@{viewModel.productsFilter.equals(ProductFilter.GOOD)}"
+                android:onClick="@{()->viewModel.setProductFilter(ProductFilter.GOOD)}"/>
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Użyj produktów bliskich terminu ważności"
+                android:checked="@{viewModel.productsFilter.equals(ProductFilter.CLOSEEXPIRED)}"
+                android:onClick="@{()->viewModel.setProductFilter(ProductFilter.CLOSEEXPIRED)}"/>
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Użyj wszystkich"
+                android:checked="@{viewModel.productsFilter.equals(ProductFilter.ALL)}"
+                android:onClick="@{()->viewModel.setProductFilter(ProductFilter.ALL)}"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView12"
+            :textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Wybierz porę:"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+
+        <Button
+            android:layout_width="89dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="16dp"
+            android:text="Szukaj"
+            android:textSize="10dp"
+            android:onClick="@{() -> viewModel.getPrefferedRecipe(user.id)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12">
+
+
+            <RadioButton
+                android:id="@+id/radioButton7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.foodTypeFilter.equals(FoodTypeFilter.SNIADANIE)}"
+                android:onClick="@{()->viewModel.setFoodTypeFilter(FoodTypeFilter.SNIADANIE)}"
+                android:text="Śniadanie" />
+
+            <RadioButton
+                android:id="@+id/radioButton6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.foodTypeFilter.equals(FoodTypeFilter.OBIAD)}"
+                android:onClick="@{()->viewModel.setFoodTypeFilter(FoodTypeFilter.OBIAD)}"
+                android:text="Obiad" />
+
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.foodTypeFilter.equals(FoodTypeFilter.DESER)}"
+                android:onClick="@{()->viewModel.setFoodTypeFilter(FoodTypeFilter.DESER)}"
+                android:text="Deser" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.foodTypeFilter.equals(FoodTypeFilter.KOLACJA)}"
+                android:onClick="@{()->viewModel.setFoodTypeFilter(FoodTypeFilter.KOLACJA)}"
+                android:text="Kolacja" />
+
+        </RadioGroup>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
