@@ -10,6 +10,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.barlipdev.dwyf.databinding.RecipeInfoFragmentBinding
 import com.barlipdev.dwyf.datastore.DataStoreManager
+import android.text.method.ScrollingMovementMethod
+
+
+
 
 class RecipeInfoFragment : Fragment() {
 
@@ -32,6 +36,8 @@ class RecipeInfoFragment : Fragment() {
         binding.viewModel = viewModel
 
         preferences = DataStoreManager(requireContext())
+
+        binding.description.setMovementMethod(ScrollingMovementMethod())
 
         return binding.root
     }

@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_bg">
+        android:background="@drawable/ic_bg2">
 
         <ImageView
             android:id="@+id/imageView8"
@@ -92,11 +92,12 @@
 
 
         <Button
-            android:layout_width="89dp"
-            android:layout_height="34dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Szukaj"
             android:textSize="10dp"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
             android:onClick="@{() -> viewModel.getPrefferedRecipe(user.id)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

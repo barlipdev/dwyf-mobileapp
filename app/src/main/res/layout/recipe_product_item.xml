@@ -14,62 +14,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/cardview_light_background"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="5dp"
-            app:cardUseCompatPadding="true"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relativelayout"
+            android:layout_width="382dp"
+            android:layout_height="25dp"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/relativelayout"
-                android:layout_width="382dp"
-                android:layout_height="43dp"
-                android:backgroundTint="@color/cardview_dark_background"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/productImg"
-                    android:layout_width="30dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="10dp"
-                    android:paddingTop="5dp"
-                    android:src="@drawable/ic_product"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.017"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/productName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/productImg"
-                    android:layout_alignTop="@+id/productImg"
-                    android:layout_alignRight="@+id/productImg"
-                    android:layout_alignBottom="@+id/productImg"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="1dp"
-                    android:text="@{recipeProduct.name}"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.078"
-                    app:layout_constraintStart_toEndOf="@+id/productImg"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.489" />
+            <ImageView
+                android:id="@+id/productImg"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="10dp"
+                android:paddingTop="5dp"
+                android:src="@drawable/ic_product"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.017"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/productName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/productImg"
+                android:layout_alignTop="@+id/productImg"
+                android:layout_alignRight="@+id/productImg"
+                android:layout_alignBottom="@+id/productImg"
+                android:layout_gravity="center_vertical"
+                android:text="@{recipeProduct.name}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.030"
+                app:layout_constraintStart_toEndOf="@+id/productImg"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
