@@ -42,7 +42,8 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
         email: String,
         password: String
     ) = viewModelScope.launch {
-        _user.value = repository.register(username,email,password)
+        val user = User("",email,"",password, emptyList(),username,emptyList())
+        _user.value = repository.register(user)
     }
 
     fun setUsername(s: Editable){

@@ -46,4 +46,11 @@ class UserRepository(private val api: UserApi) :BaseRepository(){
         api.deleteExpiredProducts(userId)
     }
 
+    suspend fun deleteShoppingList(
+        userId: String,
+        shoppingList: ShoppingList
+    ) = safeApiCall {
+        api.deleteShoppingList(userId, shoppingList)
+    }
+
 }

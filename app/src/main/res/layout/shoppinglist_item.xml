@@ -7,12 +7,16 @@
         <variable
             name="shoppingList"
             type="com.barlipdev.dwyf.network.responses.ShoppingList" />
+        <variable
+            name="clickListener"
+            type="com.barlipdev.dwyf.app.profile.ShoppingListsAdapter.ShoppingListListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/shoppingListItemLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(shoppingList)}">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

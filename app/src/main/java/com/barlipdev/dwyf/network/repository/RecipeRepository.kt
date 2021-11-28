@@ -2,6 +2,7 @@ package com.barlipdev.dwyf.network.repository
 
 import com.barlipdev.dwyf.network.RecipeApi
 import com.barlipdev.dwyf.network.responses.FoodTypeFilter
+import com.barlipdev.dwyf.network.responses.MatchedRecipe
 import com.barlipdev.dwyf.network.responses.ProductFilter
 
 class RecipeRepository(private val api: RecipeApi) : BaseRepository() {
@@ -12,6 +13,13 @@ class RecipeRepository(private val api: RecipeApi) : BaseRepository() {
         foodTypeFilter: FoodTypeFilter
     ) = safeApiCall {
         api.getPrefferedRecipe(userId,productFilter, foodTypeFilter)
+    }
+
+    suspend fun addPerform(
+        userId: String,
+        matchedRecipe: MatchedRecipe
+    ) = safeApiCall {
+        api.addPerform(userId,matchedRecipe)
     }
 
 }

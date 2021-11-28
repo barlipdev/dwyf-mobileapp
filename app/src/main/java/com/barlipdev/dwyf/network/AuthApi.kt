@@ -12,11 +12,8 @@ interface AuthApi {
         @Body loginData: LoginData
     ) : LoginResponse
 
-    @FormUrlEncoded
     @POST("register")
     suspend fun register(
-        @Field("username") username: String,
-        @Field("email") email: String,
-        @Field("password") password: String
+        @Body user: User
     ) : User
 }

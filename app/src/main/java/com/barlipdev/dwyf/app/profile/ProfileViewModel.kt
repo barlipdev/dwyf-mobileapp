@@ -18,6 +18,14 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     val shoppingLists: LiveData<Resource<List<ShoppingList>>>
         get() = _shoppingLists
 
+    private val _navigateToShoppingList = MutableLiveData<ShoppingList?>()
+    val navigateToShoppingList
+        get() = _navigateToShoppingList
+
+    private val _logout = MutableLiveData<Boolean>()
+    val logout: LiveData<Boolean>
+        get() = _logout
+
     private val remoteDataSource = RemoteDataSource()
     private var preferences: DataStoreManager = DataStoreManager(application.applicationContext)
     private val authToken = runBlocking { preferences.authToken.first() }
@@ -27,6 +35,22 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         viewModelScope.launch {
             _shoppingLists.value = repository.getShoppingLists(userId)
         }
+    }
+
+    fun navigateToShoppingListOn(shoppingList: ShoppingList){
+        _navigateToShoppingList.value = shoppingList
+    }
+
+    fun navigateToShoppingListOff(){
+        _navigateToShoppingList.value = null
+    }
+
+    fun logout(){
+        _logout.value = true
+    }
+
+    fun logoutFinished(){
+        _logout.value = false
     }
 
     class Factory(val app: Application): ViewModelProvider.Factory{

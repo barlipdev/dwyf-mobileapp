@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="performingRecipe"
+            type="com.barlipdev.dwyf.network.responses.PerformingRecipe" />
+        <variable
+            name="clickListener"
+            type="com.barlipdev.dwyf.app.recipe.performingrecipe.performingrecipelist.PerformingRecipesAdapter.PerformingRecipesListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/shoppingListItemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(performingRecipe)}">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/cardview_light_background"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/relativelayout"
+                android:layout_width="382dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/cardview_dark_background"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/recipePhoto"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/ic_favourite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.017"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/recipeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/recipePhoto"
+                    android:layout_alignTop="@+id/recipePhoto"
+                    android:layout_alignRight="@+id/recipePhoto"
+                    android:layout_alignBottom="@+id/recipePhoto"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="4dp"
+                    android:text="@{performingRecipe.matchedRecipe.recipe.name}"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/recipePhoto"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.15" />
+
+                <TextView
+                    android:id="@+id/recipeStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/recipePhoto"
+                    android:layout_alignTop="@+id/recipePhoto"
+                    android:layout_alignRight="@+id/recipePhoto"
+                    android:layout_alignBottom="@+id/recipePhoto"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="4dp"
+                    android:text="Status"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/recipePhoto"
+                    app:layout_constraintTop_toBottomOf="@+id/recipeName"
+                    app:layout_constraintVertical_bias="0.600" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

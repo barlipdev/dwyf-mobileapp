@@ -11,9 +11,11 @@ import androidx.lifecycle.Observer
 import com.barlipdev.dwyf.databinding.RecipeInfoFragmentBinding
 import com.barlipdev.dwyf.datastore.DataStoreManager
 import android.text.method.ScrollingMovementMethod
-
-
-
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.barlipdev.dwyf.R
+import com.barlipdev.dwyf.network.Resource
+import kotlinx.coroutines.launch
 
 class RecipeInfoFragment : Fragment() {
 
@@ -47,10 +49,46 @@ class RecipeInfoFragment : Fragment() {
 
         preferences.matchedRecipeJson.observe(viewLifecycleOwner, Observer {
             if (it != null){
-                Log.i("RecipeInfo","Works")
+                binding.matchedRecipe = preferences.getMatchedRecipeFromJson().value!!
                 viewModel.setMatchedRecipe(preferences.getMatchedRecipeFromJson().value!!)
+                if (preferences.getMatchedRecipeFromJson().value!!.notAvailableProducts.isNotEmpty()){
+                    viewModel.setNotReadyToCook()
+                }else{
+                    viewModel.setReadyToCook()
+                }
             }
         })
+
+        preferences.userJson.observe(viewLifecycleOwner, Observer {
+            if (it != null){
+                binding.user = preferences.getUserFromJson().value!!
+                viewModel.setUser(preferences.getUserFromJson().value!!)
+            }
+        })
+
+        viewModel.performingRecipe.observe(viewLifecycleOwner, Observer { recipe -> recipe?.let {
+            when (it){
+                is Resource.Success -> {
+                    lifecycleScope.launch {
+                        preferences.savePerformingRecipe(it.value)
+                    }
+                    viewModel.navigateToPerformingOn()
+                }
+                is Resource.Failure -> {
+                    Log.i("PerformingRecipe",it.toString())
+                }
+            }
+
+        } })
+
+        viewModel.navigateToPerforming.observe(viewLifecycleOwner, Observer { isNavigate -> isNavigate?.let {
+            if (this.findNavController().currentDestination?.id == R.id.recipeFragment){
+                if (isNavigate){
+                    this.findNavController().navigate(R.id.action_recipeFragment_to_performingRecipeFragment)
+                    viewModel.navigateToPerformingOff()
+                }
+            }
+        } })
 
     }
 

@@ -32,6 +32,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val navigateToFilterRecipe: LiveData<Boolean>
         get() = _navigateToFilterRecipe
 
+    private val _navigateToPerformingRecipes = MutableLiveData<Boolean>()
+    val navigateToPerformingRecipes: LiveData<Boolean>
+        get() = _navigateToPerformingRecipes
+
+
 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User>
@@ -63,6 +68,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun navigateToFilterRecipeFinished(){
         _navigateToFilterRecipe.value = false
+    }
+
+    fun navigateToPerformingRecipes(){
+        _navigateToPerformingRecipes.value = true
+    }
+
+    fun navigateToPerformingRecipesFinished(){
+        _navigateToPerformingRecipes.value = false
     }
 
 

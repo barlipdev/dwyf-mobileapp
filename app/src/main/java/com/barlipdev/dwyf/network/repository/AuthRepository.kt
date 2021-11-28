@@ -2,6 +2,7 @@ package com.barlipdev.dwyf.network.repository
 
 import com.barlipdev.dwyf.network.AuthApi
 import com.barlipdev.dwyf.network.responses.LoginData
+import com.barlipdev.dwyf.network.responses.User
 
 class AuthRepository(private val api: AuthApi) : BaseRepository(){
 
@@ -13,11 +14,9 @@ class AuthRepository(private val api: AuthApi) : BaseRepository(){
     }
 
     suspend fun register(
-        username: String,
-        email: String,
-        password: String
+        user: User
     ) = safeApiCall {
-        api.register(username, email, password)
+        api.register(user)
     }
 
 }

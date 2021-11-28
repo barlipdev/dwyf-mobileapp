@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="shoppingList"
-            type="com.barlipdev.dwyf.network.responses.ShoppingList" />
+            name="product"
+            type="com.barlipdev.dwyf.network.responses.Product" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +47,7 @@
 
 
                 <TextView
-                    android:id="@+id/productCount"
+                    android:id="@+id/productName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/productImg"
@@ -56,7 +56,7 @@
                     android:layout_alignBottom="@+id/productImg"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="1dp"
-                    android:text="@{shoppingList.name}"
+                    android:text="@{product.name}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"

@@ -55,29 +55,6 @@ class RecipeFragment : Fragment() {
             tab.text = pages[position]
         }.attach()
 
-//        preferences = DataStoreManager(requireContext())
-//
-//        preferences.userJson.observe(viewLifecycleOwner, Observer {
-//            if (it != null){
-//                viewModel.setUser(preferences.getUserFromJson().value)
-//                viewModel.user.value?.let { it1 -> viewModel.getPrefferedRecipe(it1.id) }
-//            }
-//        })
-//
-//        viewModel.matchedRecipe.observe(viewLifecycleOwner, Observer { matchedRecipe -> matchedRecipe?.let {
-//            when(it){
-//                is Resource.Success -> {
-//                    lifecycleScope.launch {
-//                        preferences.saveMatchedRecipe(it.value)
-//                        Log.i("RecipeInfo", it.value.recipe.name)
-//                    }
-//                }
-//                is Resource.Failure -> {
-//                    Log.i("RecipeInfo",it.toString())
-//                }
-//            }
-//        } })
-
 
         return binding.root
     }

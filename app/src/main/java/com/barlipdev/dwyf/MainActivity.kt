@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         val preferences = DataStoreManager(this)
 
         preferences.authToken.asLiveData().observe(this, Observer {
-            val activity = if (it == null) AuthenticationActivity::class.java else HomeActivity::class.java
+            val activity = if (it == null || it =="") AuthenticationActivity::class.java else HomeActivity::class.java
             startNewActivity(activity)
         })
 

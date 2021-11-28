@@ -15,29 +15,6 @@ import kotlinx.coroutines.runBlocking
 
 class RecipeViewModel(application: Application) : AndroidViewModel(application) {
 
-//    private val remoteDataSource = RemoteDataSource()
-//    private var preferences: DataStoreManager = DataStoreManager(application.applicationContext)
-//    private val authToken = runBlocking { preferences.authToken.first() }
-//    private val repository = RecipeRepository(remoteDataSource.buildApi(RecipeApi::class.java,authToken))
-//
-//    private val _matchedRecipe = MutableLiveData<Resource<MatchedRecipe>>()
-//    val matchedRecipe: LiveData<Resource<MatchedRecipe>>
-//        get() = _matchedRecipe
-//
-//    private val _user = MutableLiveData<User>()
-//    val user: LiveData<User>
-//        get() = _user
-//
-//    fun getPrefferedRecipe(userId: String){
-//        viewModelScope.launch {
-//            _matchedRecipe.value = repository.getPrefferedRecipe(userId)
-//        }
-//    }
-//
-//    fun setUser(user: User?){
-//        _user.value = user!!
-//    }
-
     class Factory(val app: Application) : ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(RecipeViewModel::class.java)){

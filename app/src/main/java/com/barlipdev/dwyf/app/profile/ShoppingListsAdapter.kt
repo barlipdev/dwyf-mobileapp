@@ -8,13 +8,12 @@ import com.barlipdev.dwyf.R
 import com.barlipdev.dwyf.databinding.ShoppinglistItemBinding
 import com.barlipdev.dwyf.network.responses.ShoppingList
 
-class ShoppingListsAdapter(private val shoppingLists: List<ShoppingList>): RecyclerView.Adapter<ShoppingListsAdapter.ShoppingListViewHolder>() {
+class ShoppingListsAdapter(val clickListener: ShoppingListListener, val shoppingLists: List<ShoppingList>): RecyclerView.Adapter<ShoppingListsAdapter.ShoppingListViewHolder>() {
 
     class ShoppingListViewHolder(private val binding: ShoppinglistItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(shoppingList: ShoppingList){
+        fun bind(clickListener: ShoppingListListener, shoppingList: ShoppingList){
             binding.shoppingList = shoppingList
-//            binding.recipeProductItemLayout.animation = AnimationUtils.loadAnimation(binding.productName.context,
-//                R.anim.anim1)
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
     }
@@ -28,9 +27,12 @@ class ShoppingListsAdapter(private val shoppingLists: List<ShoppingList>): Recyc
 
     override fun onBindViewHolder(holder: ShoppingListViewHolder, position: Int) {
         val shoppingList = shoppingLists[position]
-        holder.bind(shoppingList)
+        holder.bind(clickListener,shoppingList)
     }
 
     override fun getItemCount() = shoppingLists.size
 
+    class ShoppingListListener(val clickListener: (shoppingList: ShoppingList) -> Unit){
+        fun onClick(shoppingList: ShoppingList) = clickListener(shoppingList)
+    }
 }

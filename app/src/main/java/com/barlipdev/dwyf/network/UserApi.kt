@@ -39,4 +39,10 @@ interface UserApi {
     suspend fun deleteExpiredProducts(
         @Query("userId") userId: String
     ) : User
+
+    @POST("/users/shoppingList/delete")
+    suspend fun deleteShoppingList(
+        @Query("userId") userId: String,
+        @Body shoppingList: ShoppingList
+    ) : User
 }

@@ -8,6 +8,15 @@
         <variable
             name="viewModel"
             type="com.barlipdev.dwyf.app.recipe.recipeinfo.RecipeInfoViewModel" />
+
+        <variable
+            name="user"
+            type="com.barlipdev.dwyf.network.responses.User" />
+
+        <variable
+            name="matchedRecipe"
+            type="com.barlipdev.dwyf.network.responses.MatchedRecipe" />
+        <import type="android.view.View"/>
     </data>
 
 
@@ -75,13 +84,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <Button
+                android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rozpocznij przygotowywanie"
                 android:textSize="10dp"
+                android:onClick="@{() -> viewModel.addPerform(user.id,matchedRecipe)}"
+                android:enabled="@{viewModel.readyToCook ? true : false}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nie posiadasz wszystkich składników"
+                android:textSize="8dp"
+                android:visibility="@{viewModel.readyToCook ? View.GONE : View.VISIBLE}"
+                android:textColor="@color/red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,12 @@
         <action
             android:id="@+id/action_homeFragment2_to_filterRecipeFragment"
             app:destination="@id/filterRecipeFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_performingRecipesFragment"
+            app:destination="@id/performingRecipesFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_manualProductAddingFragment"
+            app:destination="@id/manualProductAddingFragment" />
     </fragment>
     <fragment
         android:id="@+id/scanFragment"
@@ -31,11 +37,22 @@
         android:id="@+id/recipeFragment"
         android:name="com.barlipdev.dwyf.app.recipe.RecipeFragment"
         android:label="recipe_fragment"
-        tools:layout="@layout/recipe_fragment" />
+        tools:layout="@layout/recipe_fragment" >
+        <action
+            android:id="@+id/action_recipeFragment_to_performingRecipeFragment"
+            app:destination="@id/performingRecipeFragment" />
+        <action
+            android:id="@+id/action_recipeFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment2"
         android:name="com.barlipdev.dwyf.app.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment2_to_shoppingListFragment"
+            app:destination="@id/shoppingListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/filterRecipeFragment"
         android:name="com.barlipdev.dwyf.app.recipe.filterrecipe.FilterRecipeFragment"
@@ -44,4 +61,34 @@
             android:id="@+id/action_filterRecipeFragment_to_recipeFragment"
             app:destination="@id/recipeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/performingRecipeFragment"
+        android:name="com.barlipdev.dwyf.app.recipe.performingrecipe.PerformingRecipeFragment"
+        android:label="performing_recipe_fragment"
+        tools:layout="@layout/performing_recipe_fragment" />
+    <fragment
+        android:id="@+id/shoppingListFragment"
+        android:name="com.barlipdev.dwyf.app.profile.shoppinglist.ShoppingListFragment"
+        android:label="shopping_list_fragment"
+        tools:layout="@layout/shopping_list_fragment" >
+        <argument
+            android:name="shoppingList"
+            app:argType="com.barlipdev.dwyf.network.responses.ShoppingList" />
+        <action
+            android:id="@+id/action_shoppingListFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/performingRecipesFragment"
+        android:name="com.barlipdev.dwyf.app.recipe.performingrecipe.performingrecipelist.PerformingRecipesFragment"
+        android:label="PerformingRecipesFragment" >
+        <action
+            android:id="@+id/action_performingRecipesFragment_to_performingRecipeFragment"
+            app:destination="@id/performingRecipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/manualProductAddingFragment"
+        android:name="com.barlipdev.dwyf.app.product.manual.ManualProductAddingFragment"
+        android:label="manual_product_adding_fragment"
+        tools:layout="@layout/manual_product_adding_fragment" />
 </navigation>

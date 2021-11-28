@@ -10,7 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.barlipdev.dwyf.R
 import com.barlipdev.dwyf.app.home.HomeActivity
+import com.barlipdev.dwyf.app.profile.shoppinglist.ShoppingListFragmentDirections
+import com.barlipdev.dwyf.app.recipe.RecipeFragmentDirections
 import com.barlipdev.dwyf.databinding.RecipeIngredientsFragmentBinding
 import com.barlipdev.dwyf.datastore.DataStoreManager
 import com.barlipdev.dwyf.network.Resource
@@ -49,8 +53,10 @@ class RecipeIngredientsFragment : Fragment() {
 
                 if (preferences.getMatchedRecipeFromJson().value!!.notAvailableProducts.isNotEmpty()){
                     viewModel.showButtonShoppingListOn()
+                    viewModel.showNotAvailableProductsOn()
                 }else{
                     viewModel.showButtonShoppingListOff()
+                    viewModel.showNotAvailableProductsOff()
                 }
             }
         })
@@ -67,8 +73,9 @@ class RecipeIngredientsFragment : Fragment() {
                 is Resource.Success -> {
                     lifecycleScope.launch {
                         preferences.saveUser(it.value)
-                        Toast.makeText(context,"Dodano nowa listę zakupów!",Toast.LENGTH_SHORT)
                     }
+                    Toast.makeText(context,"Dodano nowa listę zakupów!",Toast.LENGTH_SHORT)
+                    viewModel.navigateToProfileOn()
                 }
                 is Resource.Failure -> {
                     Toast.makeText(context,"Nie udało się dodać listy zakupów!",Toast.LENGTH_SHORT)
@@ -83,6 +90,15 @@ class RecipeIngredientsFragment : Fragment() {
                 binding.user = preferences.getUserFromJson().value
             }
         })
+
+        viewModel.navigateToProfile.observe(viewLifecycleOwner, Observer { isNavigate -> isNavigate?.let {
+            if (this.findNavController().currentDestination?.id == R.id.recipeFragment){
+                if (isNavigate){
+                    this.findNavController().navigate(RecipeFragmentDirections.actionRecipeFragmentToProfileFragment2())
+                    viewModel.navigateToProfileOff()
+                }
+            }
+        } })
 
 
     }

@@ -2,9 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".app.profile.shoppinglist.ShoppingListFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.barlipdev.dwyf.app.profile.shoppinglist.ShoppingListViewModel" />
+        <variable
+            name="shoppinglist"
+            type="com.barlipdev.dwyf.network.responses.ShoppingList" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,9 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:text="Nazwa listy"
+            android:text="@{viewModel.shoppingList.name}"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.048"
@@ -29,9 +36,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="68dp"
-            android:drawableLeft="@drawable/ic_baseline_check_24"
-            android:text="Produkty kupione"
+            android:drawableLeft="@drawable/ic_delete_icon"
+            android:text="Usuń listę"
             android:textSize="10dp"
+            android:onClick="@{()->viewModel.confirmationShowOn()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.932"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,9 +56,12 @@
             app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/shoppingListsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="569dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.428"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView6"
             tools:listitem="@layout/product_shoppinglist_item" />
