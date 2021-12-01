@@ -2,29 +2,18 @@ package com.barlipdev.dwyf.app.home
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.os.SystemClock
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.barlipdev.dwyf.R
-import com.barlipdev.dwyf.app.product.scanning.ScanViewModel
-import com.barlipdev.dwyf.authentication.AuthenticationActivity
-import com.barlipdev.dwyf.databinding.BottomAddingFragmentBinding
 import com.barlipdev.dwyf.databinding.HomeFragmentBinding
 import com.barlipdev.dwyf.databinding.ProductAddingTypeFragmentBinding
 import com.barlipdev.dwyf.datastore.DataStoreManager
-import com.barlipdev.dwyf.network.Resource
-import com.barlipdev.dwyf.utils.startNewActivity
-import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 

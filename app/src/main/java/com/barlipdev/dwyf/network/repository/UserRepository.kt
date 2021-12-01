@@ -1,6 +1,5 @@
 package com.barlipdev.dwyf.network.repository
 
-import android.util.Log
 import com.barlipdev.dwyf.network.UserApi
 import com.barlipdev.dwyf.network.responses.Product
 import com.barlipdev.dwyf.network.responses.ShoppingList
@@ -51,6 +50,13 @@ class UserRepository(private val api: UserApi) :BaseRepository(){
         shoppingList: ShoppingList
     ) = safeApiCall {
         api.deleteShoppingList(userId, shoppingList)
+    }
+
+    suspend fun addProductManualy(
+        userId: String,
+        product: Product
+    ) = safeApiCall {
+        api.addProductManually(userId, product)
     }
 
 }

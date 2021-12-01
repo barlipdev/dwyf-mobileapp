@@ -45,4 +45,10 @@ interface UserApi {
         @Query("userId") userId: String,
         @Body shoppingList: ShoppingList
     ) : User
+
+    @POST("/users/product/manually")
+    suspend fun addProductManually(
+        @Query("userId") userId: String,
+        @Body product: Product
+    ) : User
 }

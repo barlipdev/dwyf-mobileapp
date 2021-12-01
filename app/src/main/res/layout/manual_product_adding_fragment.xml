@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".app.product.manual.ManualProductAddingFragment">
 
+
     <data>
+        <import type="com.barlipdev.dwyf.network.responses.ProductType"/>
         <variable
             name="viewModel"
             type="com.barlipdev.dwyf.app.product.manual.ManualProductAddingViewModel" />
-
+        <variable
+            name="user"
+            type="com.barlipdev.dwyf.network.responses.User" />
     </data>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -48,7 +48,29 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:afterTextChanged="@{viewModel::setProductName}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/expirationDate"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Data ważności"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:afterTextChanged="@{viewModel::setExpirationDate}"
+                android:editable="false"
+                android:id="@+id/date"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,7 +89,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                android:afterTextChanged="@{viewModel::setProductCount}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,6 +105,7 @@
             app:layout_constraintTop_toBottomOf="@+id/productCount"
             app:singleSelection="true"
             app:selectionRequired="true"
+
             >
 
             <com.google.android.material.chip.Chip
@@ -89,6 +113,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.setProductType(ProductType.KG)}"
                 android:text="KG" />
 
             <com.google.android.material.chip.Chip
@@ -96,6 +121,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.setProductType(ProductType.g)}"
                 android:text="g" />
 
             <com.google.android.material.chip.Chip
@@ -103,6 +129,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.setProductType(ProductType.L)}"
                 android:text="L" />
 
             <com.google.android.material.chip.Chip
@@ -110,6 +137,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.setProductType(ProductType.ml)}"
                 android:text="ml" />
 
             <com.google.android.material.chip.Chip
@@ -117,48 +145,26 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.setProductType(ProductType.SZT)}"
                 android:text="SZT" />
 
         </com.google.android.material.chip.ChipGroup>
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Termin ważności"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
-
-        <DatePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17"
-            />
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="36dp"
             android:drawableLeft="@drawable/ic_baseline_done_24"
             android:text="Dodaj"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.659"
-            app:layout_constraintStart_toEndOf="@+id/textView16"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expirationDate"
+            android:onClick="@{() -> viewModel.addProduct(user.id, viewModel.productName,viewModel.productCount,viewModel.productType,viewModel.expirationDate)}"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
 
 
 </layout>
