@@ -7,10 +7,8 @@ import com.barlipdev.dwyf.network.responses.ShoppingList
 class UserRepository(private val api: UserApi) :BaseRepository(){
 
     suspend fun addProductByBarcode(
-        userId: String,
         product: Product) = safeApiCall {
-            api.addProductByBarcode(userId,product)
-
+            api.addProductByBarcode(product)
     }
 
     suspend fun createShoppingList(

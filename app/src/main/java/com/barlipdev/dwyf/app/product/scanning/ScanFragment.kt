@@ -77,11 +77,8 @@ class ScanFragment : Fragment() {
 
             decodeCallback = DecodeCallback {
                 activity.runOnUiThread {
-                    viewModel.addProductByBarCode(
-                        arguments?.getString("userId").toString(),it.text,
-                        "2021-08-22"
-                    )
-                    Toast.makeText(activity, "Skanuje...", Toast.LENGTH_SHORT).show()
+                    viewModel.addProductByBarCode(it.text)
+                    Toast.makeText(activity, "Skanuje..."+it.text, Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -131,7 +128,7 @@ class ScanFragment : Fragment() {
                     dialog.show()
                 }
                 is Resource.Failure -> {
-                    Toast.makeText(context,"Nie udało się znaleźć tego produktu :/",Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context,"Nie udało się znaleźć tego produktu :/",Toast.LENGTH_SHORT).show()
                     Log.i("ProductInfo",it.toString())
                 }
             }

@@ -38,15 +38,12 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = UserRepository(remoteDataSource.buildApi(UserApi::class.java,authToken))
 
     fun addProductByBarCode(
-        userId: String,
-        barCode: String,
-        date: String
+        barCode: String
     ){
         viewModelScope.launch {
-                val product: Product = Product(barCode,date,"",0.0,UsefulnessState.GOOD,ProductType.L,
+                val product: Product = Product(barCode,"2021-04-04","",0.0,UsefulnessState.GOOD,ProductType.L,
                     emptyList<String>(),"")
-                _product.value = repository.addProductByBarcode(userId, product)
-                Log.i("addingTest",userId)
+                _product.value = repository.addProductByBarcode(product)
         }
     }
 

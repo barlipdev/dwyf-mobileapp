@@ -13,8 +13,11 @@ import com.barlipdev.dwyf.databinding.ManualProductAddingFragmentBinding
 import com.barlipdev.dwyf.datastore.DataStoreManager
 import java.util.*
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.barlipdev.dwyf.R
+import com.barlipdev.dwyf.network.Resource
+import kotlinx.coroutines.launch
 
 class ManualProductAddingFragment : Fragment() {
 
@@ -72,6 +75,23 @@ class ManualProductAddingFragment : Fragment() {
 
             dp.show()
         }
+
+        viewModel.user.observe(viewLifecycleOwner, Observer { it ->
+            when (it){
+
+                is Resource.Success -> {
+                    lifecycleScope.launch {
+                        preferences.saveUser(it.value)
+                    }
+                    Toast.makeText(context,"Produkt został dodany!",Toast.LENGTH_SHORT).show()
+                }
+
+                is Resource.Failure -> {
+                    Toast.makeText(requireContext(),"Coś poszło nie tak", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        })
 
         viewModel.message.observe(viewLifecycleOwner, Observer { message -> message?.let {
             Toast.makeText(context,message,Toast.LENGTH_SHORT).show()

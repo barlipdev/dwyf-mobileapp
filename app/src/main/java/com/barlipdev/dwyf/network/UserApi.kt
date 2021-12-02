@@ -9,7 +9,6 @@ interface UserApi {
 
     @POST("users/product/barcode")
     suspend fun addProductByBarcode(
-        @Query("userId") userId: String,
         @Body product: Product
     ) : Product
 
