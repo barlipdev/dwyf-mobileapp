@@ -49,10 +49,10 @@ class FilterRecipeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { isNavigate -> isNavigate?.let {
+        viewModel.navigateToRecipe.observe(viewLifecycleOwner, Observer { list -> list?.let {
             if (this.findNavController().currentDestination?.id == R.id.filterRecipeFragment){
-                if (isNavigate){
-                    this.findNavController().navigate(R.id.action_filterRecipeFragment_to_recipeFragment)
+                if (!list.isEmpty()){
+                    this.findNavController().navigate(FilterRecipeFragmentDirections.actionFilterRecipeFragmentToMatchedRecipeListFragment(list.toTypedArray()))
                     viewModel.navigateToRecipeFinished()
                 }
             }
@@ -61,11 +61,7 @@ class FilterRecipeFragment : Fragment() {
         viewModel.matchedRecipe.observe(viewLifecycleOwner, Observer { matchedRecipe -> matchedRecipe?.let {
             when(it){
                 is Resource.Success -> {
-                    lifecycleScope.launch {
-                        preferences.saveMatchedRecipe(it.value)
-                    }
-                    Log.i("RecipeInfo", it.value.recipe.name)
-                    viewModel.navigateToRecipe()
+                    viewModel.navigateToRecipe(it.value)
                 }
                 is Resource.Failure -> {
                     Log.i("RecipeInfo",it.toString())

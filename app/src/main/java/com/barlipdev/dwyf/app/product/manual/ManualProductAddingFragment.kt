@@ -63,14 +63,21 @@ class ManualProductAddingFragment : Fragment() {
             val day = c.get(Calendar.DAY_OF_MONTH)
 
             val dp = DatePickerDialog(requireContext(),DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                var m = ""
+                var d = ""
                 if (mMonth+1 < 10){
-                    val m = mMonth +1;
-                    binding.date.setText(""+mYear+"-0"+m+"-"+mDay)
+                    val mm = mMonth+1
+                    m = "0"+ mm
                 }else{
-                    val m = mMonth +1;
-                    binding.date.setText(""+mYear+"-"+m+"-"+mDay)
+                    val mm = mMonth+1
+                    m = ""+mm
                 }
-
+                if (mDay < 10){
+                    d = "0"+mDay
+                }else{
+                    d = ""+mDay
+                }
+                binding.date.setText(""+mYear+"-"+m+"-"+d)
             },year,month,day)
 
             dp.show()

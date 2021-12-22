@@ -49,7 +49,7 @@ class PerformingRecipeInfoViewModel(app: Application) : AndroidViewModel(app) {
 
     fun performRecipe(userId: String, performingRecipe: PerformingRecipe){
         viewModelScope.launch {
-            repository.performRecipe(userId, performingRecipe)
+            _responsePerformingRecipe.value = repository.performRecipe(userId, performingRecipe)
         }
     }
 

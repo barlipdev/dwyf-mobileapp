@@ -16,7 +16,7 @@ interface RecipeApi {
         @Query("userId") userId: String,
         @Query("productFilter") productFilter: ProductFilter,
         @Query("foodTypeFilter") foodTypeFilter: FoodTypeFilter
-    ) : MatchedRecipe
+    ) : List<MatchedRecipe>
 
     @POST("recipe/best/addPerform")
     suspend fun addPerform(

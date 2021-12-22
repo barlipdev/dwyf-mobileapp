@@ -22,12 +22,12 @@ class FilterRecipeViewModel(application: Application) :AndroidViewModel(applicat
     private val authToken = runBlocking { preferences.authToken.first() }
     private val repository = RecipeRepository(remoteDataSource.buildApi(RecipeApi::class.java,authToken))
 
-    private val _matchedRecipe = MutableLiveData<Resource<MatchedRecipe>>()
-    val matchedRecipe: LiveData<Resource<MatchedRecipe>>
-        get() = _matchedRecipe
+    private val _matchedRecipeList = MutableLiveData<Resource<List<MatchedRecipe>>>()
+    val matchedRecipe: LiveData<Resource<List<MatchedRecipe>>>
+        get() = _matchedRecipeList
 
-    private val _navigateToRecipe = MutableLiveData<Boolean>()
-    val navigateToRecipe: LiveData<Boolean>
+    private val _navigateToRecipe = MutableLiveData<List<MatchedRecipe>>()
+    val navigateToRecipe: LiveData<List<MatchedRecipe>>
         get() = _navigateToRecipe
 
     private val _productsFilter = MutableLiveData<ProductFilter>()
@@ -40,16 +40,16 @@ class FilterRecipeViewModel(application: Application) :AndroidViewModel(applicat
 
     fun getPrefferedRecipe(userId: String){
         viewModelScope.launch {
-            _matchedRecipe.value = repository.getPrefferedRecipe(userId,productsFilter.value!!,foodTypeFilter.value!!)
+            _matchedRecipeList.value = repository.getPrefferedRecipe(userId,productsFilter.value!!,foodTypeFilter.value!!)
         }
     }
 
-    fun navigateToRecipe(){
-        _navigateToRecipe.value = true
+    fun navigateToRecipe(matchedRecipeList : List<MatchedRecipe>){
+        _navigateToRecipe.value = matchedRecipeList
     }
 
     fun navigateToRecipeFinished(){
-        _navigateToRecipe.value = false
+        _navigateToRecipe.value = emptyList()
     }
 
     fun setProductFilter(filter: ProductFilter){

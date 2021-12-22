@@ -107,16 +107,24 @@ class ScanFragment : Fragment() {
 
                     val sheetBinding = BottomAddingFragmentBinding.inflate(layoutInflater,view as ViewGroup, false)
                     sheetBinding.lifecycleOwner = requireActivity()
+                    var month = ""
+                    var day = ""
 
                     sheetBinding.nameValue.text = it.value.name
                     sheetBinding.addProductBtn.setOnClickListener {
                         if (sheetBinding.datePicker.month+1 < 10){
-                            val month = sheetBinding.datePicker.month+1
-                            date = sheetBinding.datePicker.year.toString()+"-0"+month+"-"+sheetBinding.datePicker.dayOfMonth.toString()
+                            val mm = sheetBinding.datePicker.month+1
+                            month = "0"+mm
                         }else{
-                            val month = sheetBinding.datePicker.month+1
-                            date = sheetBinding.datePicker.year.toString()+"-"+month+"-"+sheetBinding.datePicker.dayOfMonth.toString()
+                            val mm = sheetBinding.datePicker.month+1
+                            month = ""+mm
                         }
+                        if(sheetBinding.datePicker.dayOfMonth < 10){
+                            day = "0"+sheetBinding.datePicker.dayOfMonth
+                        }else{
+                            day = ""+sheetBinding.datePicker.dayOfMonth
+                        }
+                        date = sheetBinding.datePicker.year.toString()+"-"+month+"-"+day
                         product.expirationDate = date
                         activity.runOnUiThread {
                             viewModel.addProduct(userId,product)
@@ -128,7 +136,7 @@ class ScanFragment : Fragment() {
                     dialog.show()
                 }
                 is Resource.Failure -> {
-                    //Toast.makeText(context,"Nie udało się znaleźć tego produktu :/",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Nie udało się znaleźć tego produktu :/",Toast.LENGTH_SHORT).show()
                     Log.i("ProductInfo",it.toString())
                 }
             }

@@ -58,8 +58,8 @@
         android:name="com.barlipdev.dwyf.app.recipe.filterrecipe.FilterRecipeFragment"
         android:label="FilterRecipeFragment" >
         <action
-            android:id="@+id/action_filterRecipeFragment_to_recipeFragment"
-            app:destination="@id/recipeFragment" />
+            android:id="@+id/action_filterRecipeFragment_to_matchedRecipeListFragment"
+            app:destination="@id/matchedRecipeListFragment" />
     </fragment>
     <fragment
         android:id="@+id/performingRecipeFragment"
@@ -91,4 +91,15 @@
         android:name="com.barlipdev.dwyf.app.product.manual.ManualProductAddingFragment"
         android:label="manual_product_adding_fragment"
         tools:layout="@layout/manual_product_adding_fragment" />
+    <fragment
+        android:id="@+id/matchedRecipeListFragment"
+        android:name="com.barlipdev.dwyf.app.recipe.matchedrecipelist.MatchedRecipeListFragment"
+        android:label="MatchedRecipeListFragment" >
+        <argument
+            android:name="matchedRecipeList"
+            app:argType="com.barlipdev.dwyf.network.responses.MatchedRecipe[]" />
+        <action
+            android:id="@+id/action_matchedRecipeListFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
+    </fragment>
 </navigation>

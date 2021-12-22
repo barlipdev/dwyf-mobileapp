@@ -17,7 +17,6 @@ class HomeActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigatin_view)
         val navController = findNavController(R.id.nav_host_fragment)
         bottomNavigationView.setupWithNavController(navController)
-        bottomNavigationView.setBackgroundColor(resources.getColor(R.color.goldColor))
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if(destination.id == R.id.scanFragment) {
